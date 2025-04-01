@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pristine Softsol - Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      background: #f4f4f4;
+    }
+    .dashboard {
+      display: flex;
+      width: 100%;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar .profile {
+      text-align: center;
+    }
+    .sidebar .profile img {
+      width: 80px;
+      border-radius: 50%;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      padding: 15px;
+    }
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+    }
+    .main-content {
+      margin-left: 270px; /* Adjusted for sidebar width */
+      padding: 20px;
+      background: #fff;
+      flex: 1;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .stats .stat {
+      background: #3498db;
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .chart-container {
+      margin-top: 40px;
+      padding: 20px;
+      background: #ecf0f1;
+      border-radius: 10px;
+      max-width: 800px; /* Fixed width */
+      max-height: 400px; /* Fixed height */
+      margin: auto;
+    }
+    canvas {
+      max-width: 100% !important;
+      max-height: 100% !important;
+    }
+    .title {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <div class="profile">
+        <img src="profile.jpg" alt="User Image">
+        <h3>Admin Name</h3>
+        <p>admin@pristinesoftsol.com</p>
+      </div>
+      <ul class="menu">
+        <li><a href="adminpanel.html">Dashboard</a></li>
+        <li><a href="#">Finance</a></li>
+        <li><a href="#">Analytics</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <header>
+        <h1>Admin Dashboard</h1>
+      </header>
+      <section class="stats" id="stats">
+        <!-- Dynamic Stats Here -->
+      </section>
+      <div class="title">
+        <H2>Annual Sales</H2>
+      </div>
+      <section class="chart-container">
+        <h3>Monthly Sales</h3>
+        <canvas id="salesChart"></canvas>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const response =
+      await fetch('fetch_data.php?')
+      /*.then(response => response.json)
+      .then(data => {
+        console.log(data.currentProjects)
+      })*/
+
+      const data = await response.json();
+      console.log(data.currentProjects)
+      document.getElementById('stats').innerHTML = `
+        <div class="stat" style="background: #3498db;" onclick = "window.location.href = 'total_projects.html'"><h3>TOTAL PROJECTS</h3><strong>${data.totalProjects}</strong></div>
+        <div class="stat" style="background: #f39c12;" onclick="window.location.href='current_projects.html'">
+          <h3>CURRENT PROJECTS</h3><strong>${data.currentProjects}</strong> 
+        </div>
+        <div class="stat" style="background: #2ecc71;" onclick="window.location.href='delivered_projects.html'">
+          <h3>DELIVERED PROJECTS</h3><strong>${data.deliveredProjects}</strong>
+        </div>
+        <div class="stat" style="background: #e74c3c;" onclick="window.location.href='pending_projects.html'">
+          <h3>PENDING PROJECTS</h3><strong>${data.pendingProjects}</strong>
+        </div> 
+      `;
+    }
+
+    fetchData();
+
+    // Fetch sales data from MySQL and display it in Chart.js
+    fetch('fetch_sales.php')
+    .then(response => response.json())
+    .then(data => {
+      const labels = data.map(item => item.month);
+      const salesData = data.map(item => item.sales);
+
+      const ctx = document.getElementById('salesChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Monthly Sales',
+            data: salesData,
+            borderColor: 'rgba(52, 152, 219, 1)',
+            backgroundColor: 'rgba(52, 152, 219, 0.2)',
+            borderWidth: 2,
+            tension: 0 /* Smooth curve */
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              title: { display: true, text: 'Months' },
+              ticks: { maxRotation: 45, minRotation: 0, autoSkip: true, maxTicksLimit: 6 }
+            },
+            y: {
+              title: { display: true, text: 'Sales in AUD' },
+              beginAtZero: true
+            }
+          },
+          elements: {
+            line: { borderWidth: 2 }
+          }
+        }
+      });
+    })
+    .catch(error => console.error('Error fetching sales data:', error));
+  </script>
+</body>
+</html>

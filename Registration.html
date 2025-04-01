@@ -6,6 +6,7 @@
     <title>Register - Pristine Softsol</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600&display=swap" rel="stylesheet">
     <style>
+        /* Existing CSS styles */
         * {
             margin: 0;
             padding: 0;
@@ -100,14 +101,18 @@
     <!-- Glassmorphism Registration Box -->
     <div class="glass">
         <h2>Register</h2>
-        <form>
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Password" required>
-            <input type="password" placeholder="Confirm Password" required>
-            <input type="number" placeholder="Contact" required>
-            <button type="submit">Register</button>
+
+        <!-- Form submission to the same page -->
+        <form method="POST" action="Registration.php">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <input type="number" name="contact" placeholder="Contact" required>
+            <button type="submit" name="submit">Register</button>
         </form>
+
+        <!-- Login link -->
         <div class="login-link">
             Already have an account? <a href="login.html">Login Here</a>
         </div>
