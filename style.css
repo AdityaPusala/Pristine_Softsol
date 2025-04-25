@@ -310,85 +310,19 @@ nav img{
     margin-top: 10px;
     color: #555;
 }
+
+
 /* Questionnaire Section */
-.questionnaire {
-    background-color: #f9f9f9;
-    padding: 50px 0;
-    text-align: center;
-}
-
-.questionnaire h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.questionnaire .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-.questionnaire form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.questionnaire .form-group {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-}
-
-.questionnaire .form-group label {
-    font-size: 1.1rem;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.questionnaire .form-group input[type="text"],
-.questionnaire .form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
+div[data-tf-live] {
     width: 100%;
-}
-
-.questionnaire .form-group select {
-    appearance: none;
-    background-color: #fff;
-}
-
-.questionnaire .form-group input[type="checkbox"] {
-    margin-right: 10px;
-}
-
-.questionnaire .form-group div {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.questionnaire button[type="submit"] {
-    padding: 15px;
-    font-size: 1.1rem;
-    color: #fff;
-    background-color: #f47c20;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.questionnaire button[type="submit"]:hover {
-    background-color: #d96717;
-}
-
+    max-width: 800px;  /* Adjust this value as needed */
+    margin: 0 auto;     /* Centers the form horizontally */
+    padding: 20px;      /* Adds spacing around the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #ffffff; /* Background color */
+    box-sizing: border-box;
+  }
 
 /* Contact Us Section */
 .contact-us {
