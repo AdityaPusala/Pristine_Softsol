@@ -22,10 +22,12 @@ if (isset($_POST['login'])) {
 
         // Verify the password
         if (password_verify($password, $user['password'])) {
-            // Store user info in session and redirect to homepage or dashboard
+            // Store user info in session and redirect to homepage
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
-            header("Location: homepage.php"); // Redirect to homepage after login
+            $_SESSION['username'] = $user['username'];
+
+            header("Location: home.php"); // <--- Change this to PHP file
             exit();
         } else {
             echo "Invalid password!";

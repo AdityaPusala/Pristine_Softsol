@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +28,9 @@
                     <li><a href="#about">PRICING</a></li>
                     <li><a href="#about">ABOUT US</a></li>
                     <li><a href="#models">CONTACT US</a></li> 
+                    <li>
+                        
+                    </li>
                 </ul>
                 </b>
             </div>
@@ -33,7 +39,14 @@
      <!-- Hero Section -->
      <section id="home" class="hero">
         <div class="hero-content">
-            <h2>BUILD YOUR PERFECT WEBSITE WITH EASE</h2>
+            <h2>
+                HEY <?php
+                        if (isset($_SESSION['username'])) {
+                            echo " " . strtoupper (htmlspecialchars($_SESSION['username'])) . "!";
+                        } else {
+                            echo "!";
+                        }
+                        ?> BUILD YOUR PERFECT WEBSITE WITH EASE</h2>
             <p>Pristine Softsol offers top-quality web development services tailored to your needs.<br> Choose from a variety of templates or customize your own website.</p>
             <a href="#services" class="hero-btn">Get Started</a>
         </div>
