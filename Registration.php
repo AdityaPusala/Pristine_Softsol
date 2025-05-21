@@ -26,18 +26,22 @@ if (isset($_POST['submit'])) {
 
             // Execute the query
             if ($stmt->execute()) {
-                echo "<p style='color:white;text-align:center;'>Registration successful! Please <a href='login.html'>login here</a>.</p>";
+                // Show alert and redirect
+                echo "<script>
+                        alert('Successfully registered!');
+                        window.location.href = 'login.html';
+                      </script>";
             } else {
-                echo "<p style='color:red;text-align:center;'>Error: Could not execute the query.</p>";
+                echo "<script>alert('Error: Could not execute the query.');</script>";
             }
 
             // Close the statement
             $stmt->close();
         } else {
-            echo "<p style='color:red;text-align:center;'>Error: Could not prepare the statement.</p>";
+            echo "<script>alert('Error: Could not prepare the statement.');</script>";
         }
     } else {
-        echo "<p style='color:red;text-align:center;'>Passwords do not match!</p>";
+        echo "<script>alert('Passwords do not match!');</script>";
     }
 }
 ?>
