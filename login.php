@@ -26,6 +26,8 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email']; 
+
 
             header("Location: home.php"); // <--- Change this to PHP file
             exit();

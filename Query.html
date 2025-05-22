@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Query Page</title>
+  <link rel="stylesheet" href="Query.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1>Not Sure About The Purchase?</h1>
+      <h4>Reach us now</h4>
+    </div>
+
+    <div class="content-wrapper">
+      <!-- Left Image -->
+      <div class="image-container">
+        <img src="images/Query.png" alt="Query Image" />
+      </div>
+
+      <!-- Right Form -->
+      <div class="form-container">
+        <div class="card">
+          <div class="card-body">
+            <form id="contact-form" role="form" method="POST" action="Query.php">
+              <div class="form-group">
+                <label for="form_name">Full Name *</label>
+                <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your firstname *" required />
+              </div>
+
+              <div class="form-group">
+                <label for="form_email">Email *</label>
+                <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required />
+              </div>
+
+              <div class="form-group">
+                <label for="form_need">Please specify your need *</label>
+                <select id="form_need" name="need" class="form-control" required>
+                  <option value="" selected disabled>--Select Your Issue--</option>
+                  <option>Request Invoice for order</option>
+                  <option>Negotiate the Price for order</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="form_message">Message *</label>
+                <textarea id="form_message" name="message" class="form-control" placeholder="Write your message here." rows="4" required></textarea>
+              </div>
+
+              <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Send Message" />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
