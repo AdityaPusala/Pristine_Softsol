@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2025 at 03:23 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 24, 2025 at 07:20 AM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `Message_id` int(11) NOT NULL,
+  `User_id` int(11) NOT NULL,
+  `Name` varchar(225) NOT NULL,
+  `Email` varchar(225) NOT NULL,
+  `Message` varchar(225) NOT NULL,
+  `Time` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`Message_id`, `User_id`, `Name`, `Email`, `Message`, `Time`) VALUES
+(1, 1, 'Nanditha', 'nkonda@gmail.com', 'I wouild LIKE TO', '2025-04-12 21:25:26'),
+(2, 1, 'Aditya', 'aditya@gmail.com', 'I would know more about services.', '2025-04-13 10:58:35'),
+(3, 1, 'Arjun', 'Arjun05@gmail.com', 'More INfo', '2025-04-15 14:47:53'),
+(4, 1, 'jhon', 'Jhon@gmail.com', 'More info for services', '2025-04-15 14:48:27'),
+(5, 1, 'Aruna', 'Aruna27@gmail.com', 'I would know about the services.', '2025-05-03 08:25:19'),
+(6, 1, 'Test ', 'Test123@gmail.com', 'Test about services', '2025-05-03 08:44:27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `projects`
 --
 
@@ -33,7 +60,7 @@ CREATE TABLE `projects` (
   `status` varchar(50) NOT NULL,
   `assigned_to` varchar(255) NOT NULL,
   `deadline` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `projects`
@@ -55,19 +82,69 @@ INSERT INTO `projects` (`id`, `project_name`, `status`, `assigned_to`, `deadline
 -- --------------------------------------------------------
 
 --
--- Table structure for table `questionnaire_responses`
+-- Table structure for table `query`
 --
 
-CREATE TABLE `questionnaire_responses` (
+CREATE TABLE `query` (
+  `Message_id` int(11) NOT NULL,
+  `User_id` int(11) NOT NULL,
+  `Name` varchar(225) NOT NULL,
+  `Email` varchar(225) NOT NULL,
+  `Issue` varchar(225) NOT NULL,
+  `Message` varchar(225) NOT NULL,
+  `Time` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `query`
+--
+
+INSERT INTO `query` (`Message_id`, `User_id`, `Name`, `Email`, `Issue`, `Message`, `Time`) VALUES
+(1, 0, 'Jhon', 'jhon@gmail.com', 'Negotiate the Price for order', 'test', '2025-04-25 12:26:09'),
+(2, 0, 'jack', 'jackD@gmail.com', 'Request Invoice for order', 'Invoice please', '2025-04-25 12:27:07'),
+(3, 0, 'Nanditha', 'nkonda@gmail.com', 'Negotiate the Price for order', 'More pricing options', '2025-04-25 12:30:09'),
+(4, 0, 'Nanditha', 'nkonda@gmail.com', 'Negotiate the Price for order', 'More pricing options', '2025-04-25 12:32:11'),
+(5, 0, 'Aditya', 'adi@gmail.com', 'Request Invoice for order', 'invoice ', '2025-04-25 12:32:56'),
+(6, 0, 'David', 'Davidjones@gmail.com', 'Other', 'More template options', '2025-04-25 12:34:48'),
+(7, 0, 'ram', 'ram025@gmail.com', 'Other', 'options for price', '2025-04-25 12:37:24'),
+(8, 0, 'Richard', 'richard08@gmail.com', 'Other', 'details', '2025-04-25 12:40:26'),
+(9, 0, 'james', 'jamesbond@gmail.com', 'Negotiate the Price for order', 'amount \r\n', '2025-04-25 12:41:58'),
+(10, 0, 'Laura', 'laura05@gmail.com', 'Other', 'Test 123', '2025-04-26 00:51:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questionnaire`
+--
+
+CREATE TABLE `questionnaire` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `question_1` text NOT NULL,
-  `question_2` text NOT NULL,
-  `question_3` text NOT NULL,
-  `question_4` text NOT NULL,
-  `question_5` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `businessName` varchar(255) DEFAULT NULL,
+  `industryType` varchar(100) DEFAULT NULL,
+  `targetAudience` varchar(255) DEFAULT NULL,
+  `websiteType` varchar(100) DEFAULT NULL,
+  `technology` varchar(100) DEFAULT NULL,
+  `layoutStyle` varchar(100) DEFAULT NULL,
+  `logo` varchar(50) DEFAULT NULL,
+  `ecommerce` varchar(50) DEFAULT NULL,
+  `paymentGateway` varchar(100) DEFAULT NULL,
+  `contactForm` varchar(50) DEFAULT NULL,
+  `liveChat` varchar(50) DEFAULT NULL,
+  `estimatedPrice` varchar(50) DEFAULT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `questionnaire`
+--
+
+INSERT INTO `questionnaire` (`id`, `username`, `email`, `businessName`, `industryType`, `targetAudience`, `websiteType`, `technology`, `layoutStyle`, `logo`, `ecommerce`, `paymentGateway`, `contactForm`, `liveChat`, `estimatedPrice`, `submitted_at`) VALUES
+(1, '', '', 'Pristine', 'Fashion', 'Teenagers', 'eCommerce', 'HTML/CSS', 'Minimalistic', 'No', 'Yes', 'Stripe', 'Yes', 'Yes', '', '2025-05-20 08:20:23'),
+(2, 'Adam Smith', '', 'Pristine', 'Fashion', 'Teenagers', 'Portfolio', 'WordPress', 'Modern', 'Need a new one', 'Yes', 'Stripe', 'Yes', 'No', '', '2025-05-20 08:28:20'),
+(3, '', '', 'Pristine', 'Fashion', 'Teenagers', 'Landing Page', 'WordPress', 'Minimalistic', 'Yes', 'Yes', 'Stripe', 'Yes', 'Yes', '900', '2025-05-22 00:17:46'),
+(4, 'Adam Smith', 'Adam@gmail.com', 'agasthya', 'Fashion', 'Teenagers', 'eCommerce', 'WordPress', 'Modern', 'No', 'Yes', 'Razorpay', 'Yes', 'Yes', '1650', '2025-05-22 01:22:13');
 
 -- --------------------------------------------------------
 
@@ -79,7 +156,7 @@ CREATE TABLE `sales_data` (
   `id` int(11) NOT NULL,
   `month` varchar(20) NOT NULL,
   `sales` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `sales_data`
@@ -106,7 +183,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `contact` varchar(15) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -115,11 +192,22 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `contact`, `created_at`) VALUES
 (1, 'Aditya Pusala', 'adityapusala5678@gmail.com', '$2y$10$4XcH.xiJ0b.HPZkKcNlfKevM8hrh2UC6tYcQPyix0iLB./R4OyhE6', '8466920031', '2025-02-12 07:23:40'),
 (2, 'alex', 'alex@gmail.com', '$2y$10$iWhVueF1q5BpZ1l62Xhd0Or2SN2HdHnICRgTBERBCxpMJm/qR64qa', '123456', '2025-02-12 08:04:13'),
-(3, 'Robert Downey Jr', 'iamironman@gmail.com', '$2y$10$JIvUCZUsjtbuZycKwRJnq.LsROjxFIfIRuHE3g/Lphcu5I8kke7uu', '416621167', '2025-04-02 01:21:02');
+(3, 'Robert Downey Jr', 'iamironman@gmail.com', '$2y$10$JIvUCZUsjtbuZycKwRJnq.LsROjxFIfIRuHE3g/Lphcu5I8kke7uu', '416621167', '2025-04-02 01:21:02'),
+(4, 'supriya', 'supriyachinny@gmail.com', '$2y$10$FdCRCDmPYxf4pkQZI3ylKuIxGxP3Bt9ouGEKMvcWahON2663k6CKq', '414051554', '2025-05-02 15:32:40'),
+(6, 'Aruna', 'aruna27@gmail.com', '$2y$10$eHsZb7PWrD.auDkaeuHzPu2H1CDu6WXRJlHshjt5SjXB8c3bilMDa', '9000654020', '2025-05-02 15:44:35'),
+(7, 'Srinivas', 'srinivas05@gmail.com', '$2y$10$9meIXYxoW.7REWL846AK8unafaFRt6a1Sa6D5aR8XGVZUcgDl4s0u', '9395385804', '2025-05-02 19:16:52'),
+(8, 'Chanduru', 'chanduru15@gmail.com', '$2y$10$/UWOGYHat5.7dEGbhxJs1.hj5h/i5UEUQzQCL4LMGAz4wvnOCcR8S', '451745369', '2025-05-02 19:19:18'),
+(9, 'Test', 'Test123@gmail.com', '$2y$10$/PgiKlyonhtzHkAXKfc1Qe8mWPaqtCxpBxDCcu0mIXRS9zfcosTfG', '6303098598', '2025-05-02 22:42:12');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`Message_id`);
 
 --
 -- Indexes for table `projects`
@@ -128,11 +216,16 @@ ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `questionnaire_responses`
+-- Indexes for table `query`
 --
-ALTER TABLE `questionnaire_responses`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+ALTER TABLE `query`
+  ADD PRIMARY KEY (`Message_id`);
+
+--
+-- Indexes for table `questionnaire`
+--
+ALTER TABLE `questionnaire`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sales_data`
@@ -152,16 +245,28 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `Message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `questionnaire_responses`
+-- AUTO_INCREMENT for table `query`
 --
-ALTER TABLE `questionnaire_responses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `query`
+  MODIFY `Message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `questionnaire`
+--
+ALTER TABLE `questionnaire`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sales_data`
@@ -173,17 +278,7 @@ ALTER TABLE `sales_data`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `questionnaire_responses`
---
-ALTER TABLE `questionnaire_responses`
-  ADD CONSTRAINT `questionnaire_responses_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
