@@ -1,3 +1,26 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    echo '<form action="logout.php" method="POST" style="position: absolute; top: 45px; right: 50px;">
+            <button type="submit" style="
+                background-color: #ff4d4d;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: background-color 0.3s ease;
+            " 
+            onmouseover="this.style.backgroundColor=\'#e60000\'"
+            onmouseout="this.style.backgroundColor=\'#ff4d4d\'">
+                Logout
+            </button>
+          </form>';
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,6 +130,7 @@ canvas {
   <header>
     <h1>Admin Dashboard</h1>
   </header>
+
   <div class="toggle-container">
     <label>
       <input type="checkbox" id="darkToggle"/> Dark Mode
@@ -137,23 +161,24 @@ canvas {
     });
 
     async function fetchData() {
-      const response = await fetch('fetch_data.php');
-      const data = await response.json();
-      document.getElementById('stats').innerHTML = `
-        <div class="stat" style="background: #3498db;" onclick="window.location.href='total_projects.html'">
-          <h3>TOTAL PROJECTS</h3><strong>${data.totalProjects}</strong>
-        </div>
-        <div class="stat" style="background: #f39c12;" onclick="window.location.href='current_projects.html'">
-          <h3>CURRENT PROJECTS</h3><strong>${data.currentProjects}</strong>
-        </div>
-        <div class="stat" style="background: #2ecc71;" onclick="window.location.href='delivered_projects.html'">
-          <h3>DELIVERED PROJECTS</h3><strong>${data.deliveredProjects}</strong>
-        </div>
-        <div class="stat" style="background: #e74c3c;" onclick="window.location.href='pending_projects.html'">
-          <h3>PENDING PROJECTS</h3><strong>${data.pendingProjects}</strong>
-        </div>
-      `;
-    }
+    const response = await fetch('project_counts.php');
+    const data = await response.json();
+    document.getElementById('stats').innerHTML = `
+      <div class="stat" style="background: #3498db;" onclick="window.location.href='total_projects.html'">
+        <h3>TOTAL PROJECTS</h3><strong>${data.totalProjects}</strong>
+      </div>
+      <div class="stat" style="background: #f39c12;" onclick="window.location.href='current_projects.html'">
+        <h3>CURRENT PROJECTS</h3><strong>${data.currentProjects}</strong>
+      </div>
+      <div class="stat" style="background: #2ecc71;" onclick="window.location.href='delivered_projects.html'">
+        <h3>DELIVERED PROJECTS</h3><strong>${data.deliveredProjects}</strong>
+      </div>
+      <div class="stat" style="background: #e74c3c;" onclick="window.location.href='pending_projects.html'">
+        <h3 style="margin-top: 40px";>PENDING PROJECTS</h3>
+      </div>
+  `;
+}
+
 
     fetchData();
 

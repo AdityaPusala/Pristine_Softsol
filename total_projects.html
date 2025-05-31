@@ -1,47 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Current Projects - Pristine Softsol</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Total Projects - Pristine Softsol</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; }
-    table { width: 100%; border-collapse: collapse; background: #fff; }
-    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-    th { background: #2980b9; color: white; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px 40px;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin: 60px 0 20px;
+      text-align: center;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .back-button {
+      align-self: flex-start;
+      margin-bottom: 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .back-button:hover {
+      background: #2980b9;
+    }
+
+    table {
+      width: 1200px;
+      max-width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #ddd;
+    }
+
+    thead {
+      background: #2980b9;
+      color: white;
+    }
+
+    thead th {
+      padding: 15px 20px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #ddd;
+      transition: background-color 0.3s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #f0f8ff;
+    }
+
+    tbody td {
+      padding: 15px 20px;
+      vertical-align: middle;
+      border: 1px solid #ddd;
+    }
   </style>
 </head>
 <body>
-  <h1>TOTAL PROJECTS</h1>
+ <a href="adminpanel.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+  <h1>Total Projects</h1>
+
   <table>
     <thead>
       <tr>
         <th>Project Name</th>
         <th>Status</th>
         <th>Assigned To</th>
-        <th>Deadline</th>
       </tr>
     </thead>
-    <tbody id="current-projects-data"></tbody>
+    <tbody id="total-projects-data">
+      <tr><td colspan="3" style="text-align:center;">Loading projects...</td></tr>
+    </tbody>
   </table>
 
   <script>
-    fetch('fetch_data.php')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);  // Check the structure of the response
-      let rows = '';
-      data.forEach(proj => {
-        rows += `<tr>
-          <td>${proj.project_name}</td>
-          <td>${proj.status}</td>
-          <td>${proj.assigned_to}</td>
-          <td>${proj.deadline}</td>
-        </tr>`;
-      });
-      document.getElementById('current-projects-data').innerHTML = rows;
-    })
-    .catch(error => console.error('Error fetching project data:', error));
+    async function fetchAllProjects() {
+      try {
+        // No status param fetches all projects, so override URL to fetch all statuses.
+        const res = await fetch('fetch_data.php?status='); 
+        const data = await res.json();
+
+        const projects = data.projects || [];
+        const tbody = document.getElementById('total-projects-data');
+
+        if (!projects.length) {
+          tbody.innerHTML = '<tr><td colspan="3" style="text-align:center;">No projects found.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = projects.map(proj => `
+          <tr>
+            <td>${proj.project_name}</td>
+            <td>${proj.status}</td>
+            <td>${proj.assigned_name || 'Unassigned'}</td>
+          </tr>
+        `).join('');
+      } catch (error) {
+        document.getElementById('total-projects-data').innerHTML =
+          '<tr><td colspan="3" style="text-align:center;color:red;">Failed to load projects.</td></tr>';
+        console.error('Error fetching project data:', error);
+      }
+    }
+
+    fetchAllProjects();
   </script>
 </body>
 </html>

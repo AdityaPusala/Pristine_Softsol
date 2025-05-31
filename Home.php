@@ -16,8 +16,8 @@ session_start();
 <body>
     <div class="header">
         <nav>
-            <div class="logo" style="width: 420px;">
-                <img src="images/logo.png" alt="" style="width: 20%;">
+            <div class="logo" style="width: 500px;">
+                <img src="images/logo.png" alt="" style="width: 20%; ">
             </div>
             <div class="nav-links" id="navLinks">
                 <b>
@@ -26,7 +26,9 @@ session_start();
                     <li><a href="#services">SERVICES</a></li>
                     <li><a href="#about-us">ABOUT US</a></li>
                     <li><a href="#contact-us">CONTACT US</a></li> 
-                    <li><a href="orders.html">MY ORDERS</a></li> 
+                    <li><?php if (isset($_SESSION['user_id'])): ?>
+                          <a href="logout.php">LOGOUT</a>
+                      <?php endif; ?></li> 
                 </ul>
                 </b>
             </div>
@@ -36,8 +38,8 @@ session_start();
      <section id="home" class="hero">
         <div class="hero-content">
             <h2>HEY <?php
-                        if (isset($_SESSION['username'])) {
-                            echo " " . strtoupper (htmlspecialchars($_SESSION['username'])) . "!";
+                        if (isset($_SESSION['user_name'])) {
+                            echo " " . strtoupper (htmlspecialchars($_SESSION['user_name'])) . "!";
                         } else {
                             echo "! ";
                         }
@@ -209,6 +211,37 @@ session_start();
         grid-column: span 1;
       }
     }
+    .template-options {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .template-options label {
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .template-options input[type="radio"] {
+      display: none;
+    }
+
+    .template-options img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: border 0.3s, transform 0.3s;
+    }
+
+    .template-options input[type="radio"]:checked + img {
+      border: 2px solid #ff6600;
+      transform: scale(1.05);
+    }
+
   </style>
 
 
@@ -315,6 +348,29 @@ session_start();
         <option value="No">No</option>
       </select>
     </div>
+    <div class="full-width">
+
+      <label>Select a Template:</label>
+      <div class="template-options">
+        <label>
+          <input type="radio" name="template" value="template1" />
+          <img src="images/template-1.jpg" alt="Template 1" />
+        </label>
+        <label>
+          <input type="radio" name="template" value="template2" />
+          <img src="images/template-2.jpg" alt="Template 2" />
+        </label>
+        <label>
+          <input type="radio" name="template" value="template3" />
+          <img src="images/template-3.jpg" alt="Template 3" />
+        </label>
+        <label>
+          <input type="radio" name="template" value="template4" />
+          <img src="images/template-4.jpg" alt="Template 4" />
+        </label>
+      </div>
+    </div>
+
 
 
     <p id="priceDisplay">Estimated Price: $0</p>
@@ -477,10 +533,33 @@ session_start();
 
             <!-- Video Section (Centered between Who We Are and Our Mission) -->
             <div class="video-section">
-                <video width="320" height="240" controls>
-                    <source src="images/aboutus.mov" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+              <script>
+                // Load YouTube Iframe API
+                var tag = document.createElement('script');
+                tag.src = "https://www.youtube.com/iframe_api";
+                var firstScriptTag = document.getElementsByTagName('script')[0];
+                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+                let player;
+
+                function onYouTubeIframeAPIReady() {
+                  player = new YT.Player('youtube-video');
+                }
+
+                function isInViewport(el) {
+                  const rect = el.getBoundingClientRect();
+                  return rect.top < window.innerHeight && rect.bottom >= 0;
+                }
+
+                window.addEventListener('scroll', function () {
+                  const videoEl = document.getElementById('video-container');
+                  if (player && isInViewport(videoEl)) {
+                    player.playVideo();
+                  }
+                });
+              </script>
+
+                <iframe width="600" height="315" src="https://www.youtube.com/embed/k2maqlyUuVw?si=UBooKvrkfGtxb0Xd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
             <!-- Mission Section -->
