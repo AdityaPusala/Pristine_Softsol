@@ -14,100 +14,89 @@
     }
 
     body {
-      /* Gradient background with blur */
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      position: relative;
+      background: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 40px 20px;
-      overflow: hidden;
-      color: #fff;
-    }
-
-    /* subtle noise overlay for texture */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
-      opacity: 0.1;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .site-header {
-      text-align: center;
-      margin-bottom: 30px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .header-logo {
-      width: 160px;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+      color: #000;
     }
 
     .success-card {
-      position: relative;
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: #fff;
       border-radius: 20px;
       padding: 40px 30px;
       width: 100%;
       max-width: 480px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
       text-align: center;
-      color: #fff;
+      color: #000;
       transition: box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
     }
 
     .success-card:hover {
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     }
 
     .success-icon {
       width: 90px;
       margin-bottom: 20px;
-      filter: drop-shadow(0 0 8px #7CFC00);
+      filter: drop-shadow(0 0 6px #7CFC00);
+      display: inline-block;
+      animation: bounce 1.5s ease infinite;
     }
 
     .heading {
       font-size: 2rem;
-      color: #7CFC00;
+      color: #333;
       margin-bottom: 15px;
-      text-shadow: 0 0 6px #7CFC00;
+      letter-spacing: 1.1px;
     }
 
     .message {
       font-size: 1.1rem;
-      color: #eee;
+      color: #555;
       margin-bottom: 30px;
       line-height: 1.6;
-      text-shadow: 0 0 4px rgba(0,0,0,0.4);
     }
 
     .btn {
-      background-color: #00BFFF;
+      background: linear-gradient(135deg, #00bfff, #007acc);
       color: white;
-      padding: 12px 30px;
+      padding: 14px 36px;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 191, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 191, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
 
     .btn:hover {
-      background-color: #009acd;
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0, 154, 205, 0.7);
+      background: linear-gradient(135deg, #009acd, #006ea6);
+      box-shadow: 0 8px 28px rgba(0, 154, 205, 0.8);
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10%); }
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 600px) {
@@ -126,16 +115,12 @@
   </style>
 </head>
 <body>
-
-  <header class="site-header">
-    <img src="images/logo.png" alt="Company Logo" class="header-logo" />
-  </header>
-
+<h1>PRISTINE SOFTSOL</h1><br><br>
   <div class="success-card">
     <img src="images/green tick.png" alt="Success Icon" class="success-icon" />
     <h1 class="heading">Payment Successful!</h1>
     <p class="message">
-      Thank you for your purchase.<br>
+      Thank you for your purchase.<br />
       Your payment has been processed successfully.
     </p>
     <button class="btn" onclick="continueShopping()">Continue Shopping</button>
@@ -143,7 +128,7 @@
 
   <script>
     function continueShopping() {
-      window.location.href = "index.html"; // Change if needed
+      window.location.href = "home.php"; // Change if needed
     }
   </script>
 

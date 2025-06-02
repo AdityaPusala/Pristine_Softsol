@@ -27,6 +27,19 @@ $response = $query->get_result()->fetch_assoc();
 if (!$response) {
     die("No questionnaire data found.");
 }
+
+$templateID = $response['template_id'] ?? '';
+$templateNumber = '1';
+
+if (preg_match('/template(\d+)/', $templateID, $matches)) {
+    $templateNumber = $matches[1];
+}
+
+$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "/pristinev2/images/template" . $templateNumber . ".jpg";
+if (!file_exists($template_img_path)) {
+    $templateNumber = '1';
+}
+$template_img = "/pristinev2/images/template" . $templateNumber . ".jpg";
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +54,7 @@ if (!$response) {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background:  url('images/Media.jpg') no-repeat center center fixed;
+      background: url('/pristinev2/images/Media.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #222;
       height: 100vh;
@@ -119,19 +132,30 @@ if (!$response) {
       color: #111;
     }
 
-    .summary-container h2 {
-      margin-bottom: 1.5rem;
-      font-weight: 600;
-      color: #0d47a1;
-    }
+    .summary-container {
+  flex: 0 0 35%;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  padding: 2rem 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #111;
+  max-height: 90vh; /* Optional: limit height of the right panel */
+  overflow-y: auto;  /* Optional: allow internal scrolling if needed */
+}
 
-    .template-img {
-      width: 100%;
-      max-width: 280px;
-      border-radius: 8px;
-      box-shadow: 0 6px 15px rgba(30,144,255,0.3);
-      margin-bottom: 1.5rem;
-    }
+.template-img {
+  width: 100%;
+  max-width: 280px;
+  max-height: 250px;   /* LIMIT image height */
+  object-fit: cover;   /* Maintain aspect ratio and crop if needed */
+  border-radius: 8px;
+  box-shadow: 0 6px 15px rgba(30,144,255,0.3);
+  margin-bottom: 1.5rem;
+}
+
 
     .subtotal {
       font-weight: 700;
@@ -209,7 +233,7 @@ if (!$response) {
   <div class="review-container">
 
     <div class="questions-container">
-      <h2>Questionnaire Summary</h2>
+      <h2>Order Summary</h2>
       <div class="qa-table">
         <div class="question">Business Name</div>
         <div class="answer"><?= htmlspecialchars($response['businessName']) ?></div>
@@ -247,30 +271,29 @@ if (!$response) {
     </div>
 
     <div class="summary-container">
-  <h2>Template Selected</h2>
-  <img src="images/template1.png" alt="Selected Template" class="template-img" />
-  <div class="subtotal">Subtotal: $<?= htmlspecialchars($response['estimatedPrice']) ?></div>
+      <h2>Template Selected</h2>
+      <img src="<?= htmlspecialchars($template_img) ?>" alt="Selected Template" class="template-img" />
+      <div class="subtotal">Subtotal: $<?= htmlspecialchars($response['estimatedPrice']) ?></div>
 
-  <div class="buttons-group">
-    <div class="top-row">
-      <button onclick="window.location.href='Home.php#questionnaireForm';">Edit Preferences</button>
-      <button onclick="window.location.href='Query.html';">Talk to Agent</button>
+      <div class="buttons-group">
+        <div class="top-row">
+          <button onclick="window.location.href='Home.php#questionnaireForm';">Edit Preferences</button>
+          <button onclick="window.location.href='Query.html';">Talk to Agent</button>
+        </div>
+        <div class="bottom-row">
+          <button onclick="payNow()">Pay 50%</button>
+        </div>
+      </div>
     </div>
-    <div class="bottom-row">
-      <button onclick="payNow()">Pay 50%</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  function payNow() {
-    alert("Paying 50% upfront...");
-    window.location.href = 'payment.html';
-  }
-</script>
-
 
   </div>
+
+  <script>
+    function payNow() {
+      alert("Paying 50% upfront...");
+      window.location.href = 'payment.html';
+    }
+  </script>
 
 </body>
 </html>

@@ -424,15 +424,15 @@ textarea {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    max-width: 150px; /* Ensure alignment with previous sections */
+    max-width: 1200px; /* Ensure alignment with previous sections */
     margin: 0 auto; /* Center the content */
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 /* Text Sections */
 .about-text,
 .mission-text {
-    width: 45%; /* Adjust to half of the container */
+    width: 48%; /* Adjust to half of the container */
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
@@ -440,7 +440,7 @@ textarea {
 
 /* Video Section */
 .video-section {
-    width: 100%; /* Small width to keep the video centered */
+    width: 10%; /* Small width to keep the video centered */
     text-align: center;
     display: flex;
     justify-content: center;
@@ -493,6 +493,7 @@ video {
         padding: 0;
     }
 }
+
 
 
 /* Our Process Section */

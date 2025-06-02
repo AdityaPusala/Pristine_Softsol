@@ -50,10 +50,13 @@ $stmt->bind_param(
 );
 
 if ($stmt->execute()) {
-    echo "Form submitted successfully!";
+    // Redirect to review order page
+    header("Location: Review_order.php");
+    exit();
 } else {
     echo "Error: " . $stmt->error;
 }
+
 
 $stmt->close();
 $conn->close();

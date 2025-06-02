@@ -354,19 +354,19 @@ session_start();
       <div class="template-options">
         <label>
           <input type="radio" name="template" value="template1" />
-          <img src="images/template-1.jpg" alt="Template 1" />
+          <img src="images/template1.jpg" alt="Template 1" />
         </label>
         <label>
           <input type="radio" name="template" value="template2" />
-          <img src="images/template-2.jpg" alt="Template 2" />
+          <img src="images/template2.jpg" alt="Template 2" />
         </label>
         <label>
           <input type="radio" name="template" value="template3" />
-          <img src="images/template-3.jpg" alt="Template 3" />
+          <img src="images/template3.jpg" alt="Template 3" />
         </label>
         <label>
           <input type="radio" name="template" value="template4" />
-          <img src="images/template-4.jpg" alt="Template 4" />
+          <img src="images/template4.jpg" alt="Template 4" />
         </label>
       </div>
     </div>

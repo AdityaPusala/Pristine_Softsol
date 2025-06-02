@@ -1,40 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>eCommerce Payment</title>
-  <link rel="stylesheet" href="style2.css"/>
-  <style>
-  /* Remove fixed height and scrolling */
-  .container {
-    max-height: none !important;
-    overflow: visible !important;
-  }
-
-  /* Payment logos in one row */
-  .payment-logos {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 30px !important;
-    margin-top: 30px;
-    flex-wrap: nowrap;
-    max-width: 100%;
-  }
-
-  .payment-logos img {
-    max-width: 80px !important;
-    max-height: 50px !important;
-    object-fit: contain !important;
-    filter: grayscale(40%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
-  }
-
-  .payment-logos img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.15);
-  }
-</style>
-</head>
+  <link rel="stylesheet" href="style2.css" />
   <script>
     function validateForm(event) {
       event.preventDefault();
@@ -75,7 +45,6 @@
       const [monthStr, yearStr] = expiryVal.split('/');
       const month = parseInt(monthStr, 10);
       const year = parseInt(yearStr, 10);
-
       const today = new Date();
       const expiryDate = new Date(year, month - 1, 1);
       const currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -117,9 +86,6 @@
   </script>
 </head>
 <body>
-  <header>
-    <img src="images/logo.png" alt="Logo" class="logo" />
-  </header>
 
   <div class="container">
     <div class="info-side">
@@ -130,6 +96,7 @@
 
     <div class="payment-container">
       <h2>Payment Details</h2>
+<h1>Total Amount :</h1><br><br>
       <form id="payment-form" onsubmit="return validateForm(event);">
         <label for="card-name">Cardholder Name</label>
         <input type="text" id="card-name" placeholder="John Doe" required />
