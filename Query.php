@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Execute the query and check for success
         if ($conn->query($sql) === TRUE) {
             // Success: Show alert and redirect
-            echo "<script>alert('Message sent successfully!'); window.location.href='Query.html';</script>";
+            echo "<script>alert('Message sent successfully!'); window.location.href='home.php';</script>";
         } else {
             // Error: Show alert with error message
             echo "<script>alert('Error: " . $conn->error . "'); window.location.href='Query.html';</script>";
