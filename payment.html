@@ -83,6 +83,18 @@
     function limitCVV(e) {
       e.target.value = e.target.value.replace(/[^\d]/g, '').substring(0, 3);
     }
+
+    // 🧠 New: Show Subtotal and 50% Advance
+    window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const subtotalParam = urlParams.get('subtotal');
+    const subtotal = parseFloat(subtotalParam) || 0;
+    const advance = subtotal * 0.5;
+
+    document.getElementById('subtotal-display').textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+    document.getElementById('advance-display').textContent = `Advance (50%): $${advance.toFixed(2)}`;
+  });
+
   </script>
 </head>
 <body>
@@ -96,7 +108,13 @@
 
     <div class="payment-container">
       <h2>Payment Details</h2>
-<h1>Total Amount :</h1><br><br>
+
+      <!-- 💸 Display Subtotal and Advance -->
+      <div style="margin-bottom: 20px;">
+        <h3 id="subtotal-display">Subtotal: </h3>
+        <h3 id="advance-display">Advance (50%): </h3>
+      </div>
+
       <form id="payment-form" onsubmit="return validateForm(event);">
         <label for="card-name">Cardholder Name</label>
         <input type="text" id="card-name" placeholder="John Doe" required />

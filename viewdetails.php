@@ -28,11 +28,11 @@ if (preg_match('/template(\d+)/', $templateID, $matches)) {
     $templateNumber = $matches[1];
 }
 
-$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "/pristinev2/images/template" . $templateNumber . ".jpg";
+$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "images/template" . $templateNumber . ".jpg";
 if (!file_exists($template_img_path)) {
     $templateNumber = '1';
 }
-$template_img = "/pristinev2/images/template" . $templateNumber . ".jpg";
+$template_img = "images/template" . $templateNumber . ".jpg";
 ?>
 
 <!DOCTYPE html>
