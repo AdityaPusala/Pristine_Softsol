@@ -35,7 +35,7 @@ if (preg_match('/template(\d+)/', $templateID, $matches)) {
     $templateNumber = $matches[1];
 }
 
-$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "/images/template" . $templateNumber . ".jpg";
+$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "/images/template" . $templateNumber . ".jpg"; //add the directory along with the parent folder.
 if (!file_exists($template_img_path)) {
     $templateNumber = '1';
 }
