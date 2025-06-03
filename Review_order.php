@@ -35,11 +35,11 @@ if (preg_match('/template(\d+)/', $templateID, $matches)) {
     $templateNumber = $matches[1];
 }
 
-$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "/pristinev2/images/template" . $templateNumber . ".jpg";
+$template_img_path = $_SERVER['DOCUMENT_ROOT'] . "images/template" . $templateNumber . ".jpg";
 if (!file_exists($template_img_path)) {
     $templateNumber = '1';
 }
-$template_img = "/pristinev2/images/template" . $templateNumber . ".jpg";
+$template_img = "images/template" . $templateNumber . ".jpg";
 ?>
 
 <!DOCTYPE html>
@@ -289,11 +289,12 @@ $template_img = "/pristinev2/images/template" . $templateNumber . ".jpg";
   </div>
 
   <script>
-    function payNow() {
-      alert("Paying 50% upfront...");
-      window.location.href = 'payment.html';
-    }
-  </script>
+  function payNow() {
+    const subtotal = <?= json_encode($response['estimatedPrice']) ?>;
+    const fiftyPercent = subtotal * 0.5;
+    window.location.href = `payment.html?subtotal=${subtotal}&advance=${fiftyPercent}`;
+  }
+</script>
 
 </body>
 </html>
