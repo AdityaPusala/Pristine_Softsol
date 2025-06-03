@@ -32,7 +32,7 @@ $template_img_path = $_SERVER['DOCUMENT_ROOT'] . "images/template" . $templateNu
 if (!file_exists($template_img_path)) {
     $templateNumber = '1';
 }
-$template_img = "images/template" . $templateNumber . ".jpg";
+$template_img = "images/template" . $templateNumber . ".jpg"; //add parent folder path
 ?>
 
 <!DOCTYPE html>
