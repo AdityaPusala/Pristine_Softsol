@@ -160,10 +160,11 @@ $result = $conn->query($sql);
             <td><?php echo nl2br(htmlspecialchars($row['Message'])); ?></td>
             <td><?php echo htmlspecialchars($row['Time']); ?></td>
             <td>
-              <a href="view_querydetails.php?id=<?php echo urlencode($row['Message_id']); ?>" class="view-btn">
-                View Details
-              </a>
+            <a href="https://mail.google.com/mail/?view=cm&to=<?php echo urlencode($row['Email']); ?>" target="_blank" class="view-btn">
+              Reply Customer
+             </a>
             </td>
+
           </tr>
         <?php endwhile; ?>
       <?php else: ?>
